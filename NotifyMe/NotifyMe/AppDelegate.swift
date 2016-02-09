@@ -15,8 +15,29 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        if let options = launchOptions
+        {
+            if let notification = options[UIApplicationLaunchOptionsLocalNotificationKey] as? UILocalNotification
+            {
+                if let userInfo = notification.userInfo
+                {
+                    let message = userInfo["CustomField1"] as! String
+                    print(message)
+                }
+            }
+        }
+        
         return true
+    }
+    
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification)
+    {
+        if let userInfo = notification.userInfo
+        {
+            let message = userInfo["CustomField1"] as! String
+            print(message)
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {
